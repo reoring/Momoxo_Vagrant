@@ -9,8 +9,9 @@ service "httpd" do
   action [ :enable, :restart ]
 end
 
-service "mysql-server" do
+service "mysqld" do
   supports :status => true, :restart => true, :reload => true
+  action [ :enable, :restart ]
 end
 
 service "iptables" do
@@ -39,4 +40,8 @@ git "/var/www/html/momoxo" do
   action :checkout
   user "apache"
   group "apache"
+end
+
+execute "create momoxo database" do
+  command "mysql -u root -e 'create database momoxo charset=utf8'"
 end
