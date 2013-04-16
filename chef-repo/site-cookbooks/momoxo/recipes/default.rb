@@ -44,4 +44,6 @@ end
 
 execute "create momoxo database" do
   command "mysql -u root -e 'create database momoxo charset=utf8'"
+
+  not_if "mysql -u root -e 'show databases;' | grep momoxo"
 end
