@@ -12,3 +12,7 @@ end
 describe port(3306) do
   it { should be_listening }
 end
+
+describe command('mysqlshow -uroot') do
+  it { should return_stdout /momoxo/ }
+end
