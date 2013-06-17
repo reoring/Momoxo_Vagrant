@@ -18,6 +18,15 @@ service "iptables" do
   action [ :disable, :stop ]
 end
 
+template "php.ini" do
+  path "/etc/php.ini"
+  source "php.ini.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  notifies :restart, 'service[httpd]'
+end
+
 template "httpd.conf" do
   path "/etc/httpd/conf/httpd.conf"
   source "httpd.conf.erb"
